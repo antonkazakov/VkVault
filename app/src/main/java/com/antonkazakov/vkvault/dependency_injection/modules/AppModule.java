@@ -5,11 +5,13 @@ import android.content.Context;
 
 import javax.inject.Singleton;
 
+import dagger.Module;
 import dagger.Provides;
 
 /**
  * Created by antonkazakov on 19.09.16.
  */
+@Module
 public class AppModule {
 
     private Application application;
@@ -24,4 +26,18 @@ public class AppModule {
         return this.application;
     }
 
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

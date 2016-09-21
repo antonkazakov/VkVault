@@ -58,4 +58,6 @@ dependencies {
 
     compile 'com.google.dagger:dagger:2.5'
 
+
+    compile 'com.vk:androidsdk:1.6.5'
 }

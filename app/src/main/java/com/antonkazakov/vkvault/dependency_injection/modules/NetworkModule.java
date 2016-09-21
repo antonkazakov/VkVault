@@ -27,7 +27,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetworkModule {
 
 
-    private final String BASE_URL = "";
+    private final String BASE_URL = "https://api.vk.com/method/";
+
 
     @Provides
     @Singleton
