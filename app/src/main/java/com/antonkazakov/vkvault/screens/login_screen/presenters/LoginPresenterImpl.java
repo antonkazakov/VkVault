@@ -1,21 +1,20 @@
 package com.antonkazakov.vkvault.screens.login_screen.presenters;
 
+
 import com.antonkazakov.vkvault.network.RetrofitService;
 import com.antonkazakov.vkvault.screens.login_screen.views.LoginView;
 
+
 import retrofit2.Response;
-import retrofit2.http.Query;
-import retrofit2.http.Url;
+
 import rx.Observer;
-import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 
 /**
  * Created by antonkazakov on 20.09.16.
  */
-public class LoginPresenterImpl implements LoginPresenter{
+public class LoginPresenterImpl implements LoginPresenter {
 
     RetrofitService retrofitService;
     LoginView loginView;
@@ -25,6 +24,7 @@ public class LoginPresenterImpl implements LoginPresenter{
         this.retrofitService = retrofitService;
         this.loginView = loginView;
     }
+
 
 
     @Override
