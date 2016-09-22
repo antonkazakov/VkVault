@@ -8,4 +8,9 @@
     <string name="title_activity_login">LoginActivity</string>
 
     <integer name="com_vk_sdk_AppId">5635508</integer>
+
+    <string name="rest_title">Ограничения</string>
+    <string name="rest1">Файл не должен превышать 200 МБ.</string>
+    <string name="rest2">Поддерживаемые типы файлов: doc, docx, xls, xlsx, ppt, pptx, rtf, pdf, png, jpg, gif, psd, djvu, fb2, ps и другие.</string>
+    <string name="rest3">Документ не должен нарушать авторские права.</string>
 </resources>

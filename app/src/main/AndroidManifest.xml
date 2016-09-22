@@ -13,11 +13,18 @@
         <activity android:name=".screens.start_screen.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.GET_CONTENT" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.OPENABLE" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".screens.upload_screen.ui.UploadActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.GET_CONTENT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.OPENABLE" />
+            </intent-filter>
+        </activity>
         <activity android:name=".screens.login_screen.ui.LoginActivity"></activity>
         <activity android:name="com.vk.sdk.VKServiceActivity" android:label="ServiceActivity" android:theme="@style/VK.Transparent" />
 
