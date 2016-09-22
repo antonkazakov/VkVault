@@ -20,7 +20,6 @@ public class ApplicationSingleton  extends Application {
     @SuppressWarnings("deprecation")
     public void onCreate() {
         super.onCreate();
-
         applicationSingleton = this;
 
         VKSdk.initialize(getApplicationContext());

@@ -7,9 +7,7 @@ import android.os.Bundle;
 import com.antonkazakov.vkvault.ApplicationSingleton;
 import com.antonkazakov.vkvault.R;
 import com.antonkazakov.vkvault.base.activities.BaseActivity;
-import com.antonkazakov.vkvault.network.RetrofitService;
-import com.antonkazakov.vkvault.screens.login_screen.presenters.LoginPresenterImpl;
-import com.antonkazakov.vkvault.screens.login_screen.views.LoginView;
+
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKSdk;

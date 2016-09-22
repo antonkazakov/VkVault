@@ -17,15 +17,24 @@ public class AppModule {
     private Application application;
 
     public AppModule(Application application) {
+
         this.application = application;
     }
 
     @Provides
     @Singleton
     public Context provideContext() {
+
         return this.application;
     }
 
+
+    @Provides
+    @Singleton
+    Application providesApplication() {
+
+        return application;
+    }
 
 }
 
