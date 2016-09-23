@@ -41,7 +41,7 @@ public class LoginActivity extends BaseActivity {
         if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
             @Override
             public void onResult(VKAccessToken res) {
-
+                res.save();
             }
             @Override
             public void onError(VKError error) {
