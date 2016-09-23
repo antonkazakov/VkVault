@@ -14,6 +14,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import okhttp3.MultipartBody;
 import rx.Observer;
 import rx.functions.Action0;
 
@@ -28,7 +29,6 @@ public class DocsPresenterImpl implements DocsPresenter{
     public DocsPresenterImpl(DocsView docsView){
         this.docsView = docsView;
     }
-
 
     @Override
     public void getDocuments() {
@@ -52,6 +52,16 @@ public class DocsPresenterImpl implements DocsPresenter{
                         docsView.getDocs(docListItems);
                     }
                 });
+    }
+
+    @Override
+    public void uploadFile(MultipartBody.Part part) {
+
+    }
+
+    public MultipartBody.Part createMultiPartFile(){
+
+        return MultipartBody.Part.createFormData("file","");
     }
 
 }
