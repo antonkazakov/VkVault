@@ -1,10 +1,13 @@
 package com.antonkazakov.vkvault.screens.upload_screen.ui;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.os.ParcelFileDescriptor;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +16,11 @@ import com.antonkazakov.vkvault.R;
 import com.antonkazakov.vkvault.base.activities.BaseActivity;
 import com.antonkazakov.vkvault.screens.upload_screen.presenters.UploadPresenterImpl;
 import com.antonkazakov.vkvault.screens.upload_screen.views.UploadView;
+
+import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileNotFoundException;
+
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -85,11 +93,26 @@ public class UploadActivity  extends BaseActivity implements UploadView {
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
             Uri selectedFile = data.getData();
-            Toast.makeText(this, selectedFile.toString(), Toast.LENGTH_LONG).show();
+            File f = new File(selectedFile.getPath());
+            long size = f.length();
+            ParcelFileDescriptor mInputPFD;
+            try {
+                mInputPFD = getContentResolver().openFileDescriptor(selectedFile, "r");
+                mRestTitle.setText(selectedFile.toString());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                mRestTitle.setText("File not found." + e.getMessage());
+                Log.e("MainActivity", "File not found." + e.getMessage());
+                return;
+            }
+            FileDescriptor fd = mInputPFD != null ? mInputPFD.getFileDescriptor() : null;
+
+            Toast.makeText(this, (fd != null ? fd.toString() : null) + "/" + size , Toast.LENGTH_LONG).show();
         }
     }
 }
