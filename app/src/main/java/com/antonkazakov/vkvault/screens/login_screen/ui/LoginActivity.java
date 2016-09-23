@@ -8,6 +8,7 @@ import com.antonkazakov.vkvault.ApplicationSingleton;
 import com.antonkazakov.vkvault.R;
 import com.antonkazakov.vkvault.base.activities.BaseActivity;
 
+import com.antonkazakov.vkvault.screens.files_screen.ui.DocsActivity;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKSdk;
@@ -42,6 +43,8 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onResult(VKAccessToken res) {
                 res.save();
+                startActivity(new Intent(getApplicationContext(),DocsActivity.class));
+                finish();
             }
             @Override
             public void onError(VKError error) {
