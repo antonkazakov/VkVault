@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,7 +45,10 @@ public class UploadActivity  extends BaseActivity implements UploadView {
     }
 
     private UploadPresenterImpl mPresenter;
-
+    private String mimetype;
+    private String size;
+    private String type;
+    private String extension;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,20 +100,34 @@ public class UploadActivity  extends BaseActivity implements UploadView {
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
             Uri selectedFile = data.getData();
             File f = new File(selectedFile.getPath());
-            long size = f.length();
+            extension = selectedFile.toString().substring(selectedFile.toString().lastIndexOf(".") + 1, selectedFile.toString().length());
+            mimetype = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
             ParcelFileDescriptor mInputPFD;
+            size = "Превышен допустимый размер файла.";
+            if(f.length()/1000000 < 199) {
+                size = "Размер файла: " + String.valueOf(f.length()/1000000) + " Мб";
+            }
+            if(mimetype != null) {
+                type = "Выбран недопустимый тип файла. (" + mimetype.split("/")[1] + ")";
+                if (mimetype.split("/")[1] == "doc" || mimetype.split("/")[1] == "docx" || mimetype.split("/")[1] == "xls" || mimetype.split("/")[1] == "xlsx" || mimetype.split("/")[1] == "pdf" || mimetype.split("/")[1] == "rtf" || mimetype.split("/")[1] == "ppt" || mimetype.split("/")[1] == "pptx" || mimetype.split("/")[1] == "png" || mimetype.split("/")[1] == "jpg" || mimetype.split("/")[1] == "gif" || mimetype.split("/")[1] == "png" || mimetype.split("/")[1] == "djvu" || mimetype.split("/")[1] == "fb2" || mimetype.split("/")[1] == "zip" || mimetype.split("/")[1] == "rar") {
+                    type = "Тип файла: " + mimetype.split("/")[1];
+                }
+            } else {
+                type = "Выбран недопустимый тип файла.";
+            }
+
             try {
                 mInputPFD = getContentResolver().openFileDescriptor(selectedFile, "r");
-                mRestTitle.setText(selectedFile.toString());
+                mRestTitle.setText(f.getName());
+                mRest1.setText(size);
+                mRest2.setText(type);
+                mRest3.setText("Авторство проверить мы не можем!");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                mRestTitle.setText("File not found." + e.getMessage());
-                Log.e("MainActivity", "File not found." + e.getMessage());
-                return;
+                mRestTitle.setText("Критическая ошибка. Попробуйте ещё...");
             }
-            FileDescriptor fd = mInputPFD != null ? mInputPFD.getFileDescriptor() : null;
+            //FileDescriptor fd = mInputPFD != null ? mInputPFD.getFileDescriptor() : null;
 
-            Toast.makeText(this, (fd != null ? fd.toString() : null) + "/" + size , Toast.LENGTH_LONG).show();
         }
     }
 }
