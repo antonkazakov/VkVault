@@ -150,18 +150,20 @@ public class UploadActivity  extends BaseActivity implements UploadView {
                 mRest1.setText(size);
                 mRest2.setText(type);
                 mRest3.setText("Авторство проверить мы не можем!");
-                ad = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
-                ad.setTitle("Загрузка файла на сервер");  // заголовок
-                ad.setMessage("Подтвердите загрузку файла"); // сообщение
-                ad.setPositiveButton("Да", (dialog, arg1) -> {
-                    RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), f);
-                    MultipartBody.Part body = MultipartBody.Part.createFormData("file", f.getName(), requestFile);
-                    mPresenter.uploadFile(body,f.getName());
-                });
-                ad.setNegativeButton("Нет", (dialog, arg1) -> showRestricion());
-                ad.setCancelable(true);
-                ad.setOnCancelListener(dialog -> showRestricion());
-                ad.show();
+                if(mimetype != null && f.length()/1000000 < 199){
+                    ad = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
+                    ad.setTitle("Загрузка файла на сервер");  // заголовок
+                    ad.setMessage("Подтвердите загрузку файла"); // сообщение
+                    ad.setPositiveButton("Да", (dialog, arg1) -> {
+                        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), f);
+                        MultipartBody.Part body = MultipartBody.Part.createFormData("file", f.getName(), requestFile);
+                        mPresenter.uploadFile(body,f.getName());
+                    });
+                    ad.setNegativeButton("Нет", (dialog, arg1) -> showRestricion());
+                    ad.setCancelable(true);
+                    ad.setOnCancelListener(dialog -> showRestricion());
+                    ad.show();
+                }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 mRestTitle.setText("Критическая ошибка. Попробуйте ещё...");

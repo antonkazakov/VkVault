@@ -57,7 +57,7 @@ public class UploadPresenterImpl implements UploadPresenter {
 
                     @Override
                     public void onNext(Response<UploadFileResponse> uploadFileResponseResponse) {
-                            saveFile(uploadFileResponseResponse.body().getFile(),titleFile,"");
+                        saveFile(uploadFileResponseResponse.body().getFile(),"","");
                     }
                 });
     }
