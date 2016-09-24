@@ -1,20 +1,16 @@
-package com.antonkazakov.vkvault.screens.login_screen.ui;
+package com.antonkazakov.vkvault.screens.authorization_screen.ui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.antonkazakov.vkvault.ApplicationSingleton;
 import com.antonkazakov.vkvault.R;
 import com.antonkazakov.vkvault.base.activities.BaseActivity;
 
-import com.antonkazakov.vkvault.screens.files_screen.ui.DocsActivity;
+import com.antonkazakov.vkvault.screens.maincontainer.ui.MainActivity;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKSdk;
 import com.vk.sdk.api.VKError;
-
-import javax.inject.Inject;
 
 import butterknife.OnClick;
 
@@ -28,7 +24,6 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -43,8 +38,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onResult(VKAccessToken res) {
                 res.save();
-                startActivity(new Intent(getApplicationContext(),DocsActivity.class));
-                finish();
+                startMainActivity();
             }
             @Override
             public void onError(VKError error) {
@@ -54,4 +48,11 @@ public class LoginActivity extends BaseActivity {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+
+    private void startMainActivity(){
+        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        finish();
+    }
+
 }

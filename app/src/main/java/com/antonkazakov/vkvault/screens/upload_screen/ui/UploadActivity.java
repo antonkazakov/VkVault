@@ -59,10 +59,10 @@ public class UploadActivity  extends BaseActivity implements UploadView {
     }
 
     public void showRestricion(){
-        mRestTitle.setText(R.string.rest_title);
-        mRest1.setText(R.string.rest1);
-        mRest2.setText(R.string.rest2);
-        mRest3.setText(R.string.rest3);
+        mRestTitle.setText("sdfsdf");
+        mRest1.setText("sd2111f");
+        mRest2.setText("sdfsdf2222");
+        mRest3.setText("sdfsdf3333");
     }
 
     public void showChooser(Intent intent, String TitleChooser, int num){

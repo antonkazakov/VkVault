@@ -12,4 +12,6 @@ public interface DocsPresenter {
 
     void uploadFile(MultipartBody.Part part);
 
+    void saveFile(String file, String title, String tags);
+
 }
