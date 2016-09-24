@@ -5,6 +5,8 @@ import android.util.Log;
 import com.antonkazakov.vkvault.BuildConfig;
 import com.antonkazakov.vkvault.api.ApiFactory;
 import com.antonkazakov.vkvault.models.docs.get.DocListItem;
+import com.antonkazakov.vkvault.models.savefile.SaveFileResponse;
+import com.antonkazakov.vkvault.models.uploadfile.UploadFileResponse;
 import com.antonkazakov.vkvault.repository.DocsRepository;
 import com.antonkazakov.vkvault.repository.DocsRepositoryProvider;
 import com.antonkazakov.vkvault.screens.files_screen.views.DocsView;
@@ -15,6 +17,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import okhttp3.MultipartBody;
+import retrofit2.Response;
 import rx.Observer;
 import rx.functions.Action0;
 
@@ -44,7 +47,7 @@ public class DocsPresenterImpl implements DocsPresenter{
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.e("BLA", "onError: ",e );
                     }
 
                     @Override
@@ -56,12 +59,54 @@ public class DocsPresenterImpl implements DocsPresenter{
 
     @Override
     public void uploadFile(MultipartBody.Part part) {
+        DocsRepositoryProvider.provideGithubRepository()
+                .uploadFile(part)
+                .doOnSubscribe(() -> docsView.showLoading())
+                .doOnTerminate(() -> docsView.hideLoading())
+                .subscribe(new Observer<Response<UploadFileResponse>>() {
+                    @Override
+                    public void onCompleted() {
 
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Response<UploadFileResponse> uploadFileResponseResponse) {
+
+                    }
+                });
     }
 
-    public MultipartBody.Part createMultiPartFile(){
 
-        return MultipartBody.Part.createFormData("file","");
+    @Override
+    public void saveFile(String file, String title, String tags) {
+        DocsRepositoryProvider.provideGithubRepository()
+                .saveFile(file,title,tags)
+                .doOnSubscribe(() -> docsView.showLoading())
+                .doOnTerminate(() -> docsView.hideLoading())
+                .subscribe(new Observer<Response<SaveFileResponse>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Response<SaveFileResponse> saveFileResponseResponse) {
+
+                    }
+                });
     }
+
+
+
 
 }

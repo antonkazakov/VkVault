@@ -14,4 +14,9 @@
     <string name="rest1">Файл не должен превышать 200 МБ.</string>
     <string name="rest2">Поддерживаемые типы файлов: doc, docx, xls, xlsx, ppt, pptx, rtf, pdf, png, jpg, gif, psd, djvu, fb2, ps и другие.</string>
     <string name="rest3">Документ не должен нарушать авторские права.</string>
+    <string name="title_activity_authorization">AuthorizationActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

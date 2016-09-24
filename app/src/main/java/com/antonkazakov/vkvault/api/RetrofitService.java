@@ -2,6 +2,8 @@ package com.antonkazakov.vkvault.api;
 
 import com.antonkazakov.vkvault.models.docs.get.GetDocsResponse;
 import com.antonkazakov.vkvault.models.getserver.GetUploadServerUrl;
+import com.antonkazakov.vkvault.models.savefile.SaveFileResponse;
+import com.antonkazakov.vkvault.models.uploadfile.UploadFileResponse;
 
 
 import okhttp3.MultipartBody;
@@ -22,7 +24,7 @@ public interface RetrofitService {
 
 
     @GET("docs.get")
-    Observable<Response<GetDocsResponse>> getDocs(@Query("owner_id") String owner_id, @Query("access_token") String token);
+    Observable<Response<GetDocsResponse>> getDocs(@Query("owner_id") String owner_id,@Query("v") String version, @Query("access_token") String token);
 
 
     @GET("docs.getUploadServer")
@@ -31,8 +33,9 @@ public interface RetrofitService {
 
     @Multipart
     @POST
-    Observable<Response<GetDocsResponse>> uploadFile(@Url String url, @Part MultipartBody.Part file, @Part("access_token") String token);
+    Observable<Response<UploadFileResponse>> uploadFile(@Url String url, @Part MultipartBody.Part file, @Part("access_token") String token);
 
-
+    @GET("docs.save")
+    Observable<Response<SaveFileResponse>> saveFile(@Query("file") String file, @Query("title") String title, @Query("") String tags, @Part("access_token") String token);
 
 }
