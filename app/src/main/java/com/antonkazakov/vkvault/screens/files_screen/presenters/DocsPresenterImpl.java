@@ -106,7 +106,58 @@ public class DocsPresenterImpl implements DocsPresenter{
                 });
     }
 
+    @Override
+    public void getDocsByName(String name) {
+        DocsRepositoryProvider.provideGithubRepository()
+                .documentsByName(name)
+                .doOnSubscribe(() -> docsView.showLoading())
+                .doOnTerminate(() -> docsView.hideLoading())
+                .subscribe(new Observer<List<DocListItem>>() {
+                    @Override
+                    public void onCompleted() {
 
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<DocListItem> docListItems) {
+                        docsView.getDocs(docListItems);
+                    }
+                });
+
+    }
+
+    @Override
+    public void getFilesByExt(String ext) {
+
+    }
+
+    @Override
+    public void getDocument(int id) {
+        DocsRepositoryProvider.provideGithubRepository().document(id)
+                .doOnSubscribe(() -> docsView.showLoading())
+                .doOnTerminate(() -> docsView.hideLoading())
+                .subscribe(new Observer<DocListItem>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(DocListItem docListItem) {
+                        docsView.getDoc(docListItem);
+                    }
+                });
+    }
 
 
 }

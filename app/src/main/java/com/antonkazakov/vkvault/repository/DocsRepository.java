@@ -30,6 +30,13 @@ public interface DocsRepository {
     @NonNull
     Observable<Response<SaveFileResponse>> saveFile(String file, @Nullable String title , @Nullable String tag);
 
+    @NonNull
+    Observable<List<DocListItem>> documentsByName(String name);
 
+    @NonNull
+    Observable<List<DocListItem>> documentsByExt(String ext);
+
+    @NonNull
+    Observable<DocListItem> document(int id);
 
 }

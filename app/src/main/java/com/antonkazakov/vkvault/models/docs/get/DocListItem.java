@@ -3,11 +3,13 @@ package com.antonkazakov.vkvault.models.docs.get;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import io.realm.RealmObject;
+
 /**
  * Created by antonkazakov on 23.09.16.
  */
 
-public class DocListItem {
+public class DocListItem extends RealmObject{
 
     @SerializedName("id")
     @Expose

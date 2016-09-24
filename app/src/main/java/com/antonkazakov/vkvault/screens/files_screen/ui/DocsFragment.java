@@ -125,6 +125,11 @@ public class DocsFragment extends Fragment implements DocsView{
     }
 
     @Override
+    public void getDoc(DocListItem docItem) {
+
+    }
+
+    @Override
     public void onError() {
 
     }

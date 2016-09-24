@@ -14,4 +14,10 @@ public interface DocsPresenter {
 
     void saveFile(String file, String title, String tags);
 
+    void getDocsByName(String name);
+
+    void getFilesByExt(String ext);
+
+    void getDocument(int id);
+
 }

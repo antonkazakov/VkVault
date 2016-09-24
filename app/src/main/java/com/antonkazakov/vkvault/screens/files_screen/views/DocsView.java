@@ -13,4 +13,5 @@ public interface DocsView extends BaseView{
 
     void getDocs(List<DocListItem> docListItems);
 
+    void getDoc(DocListItem docItem);
 }
