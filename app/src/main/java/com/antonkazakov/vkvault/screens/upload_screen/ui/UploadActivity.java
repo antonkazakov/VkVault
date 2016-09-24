@@ -20,6 +20,7 @@ import com.antonkazakov.vkvault.screens.upload_screen.views.UploadView;
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -49,6 +50,7 @@ public class UploadActivity  extends BaseActivity implements UploadView {
     private String size;
     private String type;
     private String extension;
+    private static HashMap<String, String> types = new HashMap<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +96,24 @@ public class UploadActivity  extends BaseActivity implements UploadView {
 
     }
 
+    public void mimeInit(){
+        types.put("doc","application/msword");
+        types.put("docx","application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+        types.put("xls","application/vnd.ms-excel");
+        types.put("xlsx","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        types.put("ppt","application/vnd.ms-powerpoint");
+        types.put("pptx","application/vnd.openxmlformats-officedocument.presentationml.presentation");
+        types.put("rtf","application/rtf");
+        types.put("pdf","application/pdf");
+        types.put("png","image/png");
+        types.put("jpeg","image/jpeg");
+        types.put("jpg","image/jpeg");
+        types.put("gif","image/gif");
+        types.put("psd","application/octet-stream");
+        types.put("rar","application/x-rar-compressed");
+        types.put("zip","application/zip");
+    }
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -109,7 +129,8 @@ public class UploadActivity  extends BaseActivity implements UploadView {
             }
             if(mimetype != null) {
                 type = "Выбран недопустимый тип файла. (" + mimetype.split("/")[1] + ")";
-                if (mimetype.split("/")[1] == "doc" || mimetype.split("/")[1] == "docx" || mimetype.split("/")[1] == "xls" || mimetype.split("/")[1] == "xlsx" || mimetype.split("/")[1] == "pdf" || mimetype.split("/")[1] == "rtf" || mimetype.split("/")[1] == "ppt" || mimetype.split("/")[1] == "pptx" || mimetype.split("/")[1] == "png" || mimetype.split("/")[1] == "jpg" || mimetype.split("/")[1] == "gif" || mimetype.split("/")[1] == "png" || mimetype.split("/")[1] == "djvu" || mimetype.split("/")[1] == "fb2" || mimetype.split("/")[1] == "zip" || mimetype.split("/")[1] == "rar") {
+                mimeInit();
+                if (types.get(mimetype.split("/")[1]) != null) {
                     type = "Тип файла: " + mimetype.split("/")[1];
                 }
             } else {
