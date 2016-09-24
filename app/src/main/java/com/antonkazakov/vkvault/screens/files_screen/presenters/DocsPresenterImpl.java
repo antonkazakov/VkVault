@@ -53,6 +53,7 @@ public class DocsPresenterImpl implements DocsPresenter{
                     @Override
                     public void onNext(List<DocListItem> docListItems) {
                         docsView.getDocs(docListItems);
+                        Log.d("SHARAPOV", String.valueOf(docListItems.size()));
                     }
                 });
     }

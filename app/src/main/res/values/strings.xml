@@ -1,21 +1,22 @@
 <resources>
     <string name="app_name">VkVault</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Открыть боковое меню</string>
+    <string name="navigation_drawer_close">Закрыть боковое меню</string>
 
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="action_settings">Настройки</string>
+    <string name="action_logout">Выход</string>
+    <string name="title_activity_login">Экран входа</string>
 
     <integer name="com_vk_sdk_AppId">5635508</integer>
-    <string name="title_activity_docs">DocsActivity</string>
+    <string name="title_activity_docs">Список документов</string>
 
     <string name="rest_title">Ограничения</string>
     <string name="rest1">Файл не должен превышать 200 МБ.</string>
     <string name="rest2">Поддерживаемые типы файлов: doc, docx, xls, xlsx, ppt, pptx, rtf, pdf, png, jpg, gif, psd, djvu, fb2, ps и другие.</string>
     <string name="rest3">Документ не должен нарушать авторские права.</string>
-    <string name="title_activity_authorization">AuthorizationActivity</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_authorization">Экран авторизации</string>
+    <string name="title_activity_main">VkVault</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -39,6 +39,32 @@ public class DocsAdapter extends RecyclerView.Adapter<DocsAdapter.DocsViewHolder
 
     @Override
     public void onBindViewHolder(DocsViewHolder holder, int position) {
+        switch(docListItems.get(position).getType()) {
+            case 1:
+                holder.img_type.setImageResource(R.drawable.i1);
+                break;
+            case 2:
+                holder.img_type.setImageResource(R.drawable.i2);
+                break;
+            case 3:
+                holder.img_type.setImageResource(R.drawable.i3);
+                break;
+            case 4:
+                holder.img_type.setImageResource(R.drawable.i4);
+                break;
+            case 5:
+                holder.img_type.setImageResource(R.drawable.i5);
+                break;
+            case 6:
+                holder.img_type.setImageResource(R.drawable.i6);
+                break;
+            case 7:
+                holder.img_type.setImageResource(R.drawable.i7);
+                break;
+            default:
+                break;
+        }
+
 
         holder.tv_name.setText(docListItems.get(position).getTitle());
         holder.tv_size.setText(docListItems.get(position).getSize()/1024/1024 + " мб.");

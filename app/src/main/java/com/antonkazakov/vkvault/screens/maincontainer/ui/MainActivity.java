@@ -21,8 +21,10 @@ import android.widget.FrameLayout;
 
 import com.antonkazakov.vkvault.R;
 import com.antonkazakov.vkvault.base.activities.BaseActivity;
+import com.antonkazakov.vkvault.screens.authorization_screen.ui.LoginActivity;
 import com.antonkazakov.vkvault.screens.files_screen.ui.DocsFragment;
 import com.antonkazakov.vkvault.screens.upload_screen.ui.UploadActivity;
+import com.vk.sdk.VKSdk;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -56,11 +58,11 @@ public class MainActivity extends BaseActivity
 
         setSupportActionBar(toolbar);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+       /* ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setNavigationItemSelectedListener(this);*/
         displayView(0);
     }
 
@@ -72,11 +74,12 @@ public class MainActivity extends BaseActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        super.onBackPressed();
+        /*if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
-        }
+        }*/
     }
 
     @Override
@@ -91,6 +94,11 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
+        }
+        if (id == R.id.action_logout) {
+            VKSdk.logout();
+            startActivity(new Intent(this,LoginActivity.class));
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

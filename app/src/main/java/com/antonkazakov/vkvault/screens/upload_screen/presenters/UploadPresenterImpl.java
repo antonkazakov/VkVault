@@ -2,6 +2,7 @@ package com.antonkazakov.vkvault.screens.upload_screen.presenters;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.antonkazakov.vkvault.models.savefile.SaveFileResponse;
 import com.antonkazakov.vkvault.models.uploadfile.UploadFileResponse;
@@ -11,6 +12,8 @@ import com.antonkazakov.vkvault.screens.upload_screen.views.UploadView;
 import okhttp3.MultipartBody;
 import retrofit2.Response;
 import rx.Observer;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by shara on 22.09.2016.
@@ -47,16 +50,17 @@ public class UploadPresenterImpl implements UploadPresenter {
                 .subscribe(new Observer<Response<UploadFileResponse>>() {
                     @Override
                     public void onCompleted() {
-
+                        Log.d("SHARAPOV", "onCompleted: upload");
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.d("SHARAPOV", "onError: upload" + e.getMessage());
                     }
 
                     @Override
                     public void onNext(Response<UploadFileResponse> uploadFileResponseResponse) {
+                        Log.d("SHARAPOV", "onNext: upload");
                         saveFile(uploadFileResponseResponse.body().getFile(),titleFile,"");
                     }
                 });
@@ -72,17 +76,17 @@ public class UploadPresenterImpl implements UploadPresenter {
                 .subscribe(new Observer<Response<SaveFileResponse>>() {
                     @Override
                     public void onCompleted() {
-
+                        Log.d("SHARAPOV", "onCompleted: save");
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.d("SHARAPOV", "onError: save");
                     }
 
                     @Override
                     public void onNext(Response<SaveFileResponse> saveFileResponseResponse) {
-
+                        Log.d("SHARAPOV", "onNext: save");
                     }
                 });
     }
