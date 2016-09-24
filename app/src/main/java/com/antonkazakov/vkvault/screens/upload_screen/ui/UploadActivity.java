@@ -2,11 +2,12 @@ package com.antonkazakov.vkvault.screens.upload_screen.ui;
 
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
-import android.util.Log;
+import android.support.v7.app.AlertDialog;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,12 +19,15 @@ import com.antonkazakov.vkvault.screens.upload_screen.presenters.UploadPresenter
 import com.antonkazakov.vkvault.screens.upload_screen.views.UploadView;
 
 import java.io.File;
-import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+
 
 
 public class UploadActivity  extends BaseActivity implements UploadView {
@@ -51,6 +55,7 @@ public class UploadActivity  extends BaseActivity implements UploadView {
     private String type;
     private String extension;
     private static HashMap<String, String> types = new HashMap<>();
+    private AlertDialog.Builder ad;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,10 +66,10 @@ public class UploadActivity  extends BaseActivity implements UploadView {
     }
 
     public void showRestricion(){
-        mRestTitle.setText("sdfsdf");
-        mRest1.setText("sd2111f");
-        mRest2.setText("sdfsdf2222");
-        mRest3.setText("sdfsdf3333");
+        mRestTitle.setText(R.string.rest_title);
+        mRest1.setText(R.string.rest1);
+        mRest2.setText(R.string.rest2);
+        mRest3.setText(R.string.rest3);
     }
 
     public void showChooser(Intent intent, String TitleChooser, int num){
@@ -78,12 +83,14 @@ public class UploadActivity  extends BaseActivity implements UploadView {
 
     @Override
     public void showLoading(){
-
+        Toast.makeText(getApplicationContext(), "Загрузка начата",
+                Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void hideLoading(){
-
+        Toast.makeText(getApplicationContext(), "Загрузка завершена",
+                Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -143,6 +150,18 @@ public class UploadActivity  extends BaseActivity implements UploadView {
                 mRest1.setText(size);
                 mRest2.setText(type);
                 mRest3.setText("Авторство проверить мы не можем!");
+                ad = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
+                ad.setTitle("Загрузка файла на сервер");  // заголовок
+                ad.setMessage("Подтвердите загрузку файла"); // сообщение
+                ad.setPositiveButton("Да", (dialog, arg1) -> {
+                    RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), f);
+                    MultipartBody.Part body = MultipartBody.Part.createFormData("file", f.getName(), requestFile);
+                    mPresenter.uploadFile(body,f.getName());
+                });
+                ad.setNegativeButton("Нет", (dialog, arg1) -> showRestricion());
+                ad.setCancelable(true);
+                ad.setOnCancelListener(dialog -> showRestricion());
+                ad.show();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 mRestTitle.setText("Критическая ошибка. Попробуйте ещё...");
